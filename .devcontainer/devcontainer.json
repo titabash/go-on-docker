@@ -1,0 +1,19 @@
+{
+  "name": "go-dev-container",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "go_local",
+  "workspaceFolder": "/go/src",
+  "extensions": ["golang.Go"],
+  "settings": {
+    "[go]": {
+      "editor.formatOnType": false,
+      "editor.formatOnPaste": false,
+      "editor.formatOnSave": true,
+      "gopls": {
+        "analyses": {
+          "ST1003": true
+        }
+      }
+    }
+  }
+}

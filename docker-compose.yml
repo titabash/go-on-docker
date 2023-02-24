@@ -1,0 +1,63 @@
+version: '3.8'
+services:
+  go_local:
+    build:
+      context: .
+      dockerfile: ./docker/local/Dockerfile
+      target: dev
+    container_name: 'go_local'
+    working_dir: '/go/'
+    tty: true
+    volumes:
+      - ./project/src:/go/src
+    ports:
+      - 3000:8080
+    networks:
+      shared-network:
+        ipv4_address: 172.30.0.2
+    env_file:
+      - ./env/common.env
+      - ./env/local.env
+    command: >
+      bash -c '
+        go run src/hello.go
+        /bin/bash
+      '
+  firebase_emulator:
+    build:
+      context: .
+      dockerfile: ./docker/firebase/Dockerfile
+    container_name: 'firebase_emulator'
+    volumes:
+      - ./docker/firebase/.firebaserc:/opt/firebase/.firebaserc
+      - ./docker/firebase/firebase-debug.log:/opt/firebase/firebase-debug.log
+      - ./docker/firebase/firebase.json:/opt/firebase/firebase.json
+      - ./docker/firebase/firestore.indexes.json:/opt/firebase/firestore.indexes.json
+      - ./docker/firebase/firestore.rules:/opt/firebase/firestore.rules
+      - ./docker/firebase/storage.rules:/opt/firebase/storage.rules
+      - ./docker/firebase/bin/:/root/.cache:cached
+      - ./docker/firebase/config/:/root/.config:cached
+      - ./docker/firebase/data:/opt/firebase/data
+    ports:
+      - 9099:9099 # Firebase Authentication
+      - 5001:5001 # Clound Functions
+      - 8080:8080 # Cloud Firestore
+      - 9000:9000 # Realtime Database
+      - 5050:5050 # Firebase Hosting
+      - 8085:8085 # Cloud Pub/Sub
+      - 9199:9199 # Cloud Storage
+      - 4000:4000 # Emulator Suite UI
+    working_dir: /opt/firebase
+    networks:
+      shared-network:
+        ipv4_address: 172.30.0.3
+    command: firebase emulators:start --import=/opt/firebase/data/firestore --export-on-exit
+    tty: true
+
+networks:
+  shared-network:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.30.0.0/24
