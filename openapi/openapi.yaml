@@ -1,0 +1,36 @@
+openapi: "3.0.3"
+info:
+  version: 1.0.0
+  title: Sample App
+  description: A sample API that uses a petstore as an example to demonstrate features in the OpenAPI 3.0 specification
+servers:
+  - url: "{server}"
+    description: URL of the server
+    variables:
+      server:
+        default: http://localhost:8080
+paths:
+  /:
+    get:
+      summary: Root path handler
+      responses:
+        "200":
+          description: OK
+  /healthcheck:
+    get:
+      summary: Health Checker
+      responses:
+        "200":
+          description: OK
+  /v1/spots:
+    $ref: "./path/spots.yaml"
+  /v1/spots/{id}:
+    $ref: "./path/spots.id.yaml"
+components:
+  schemas:
+    spot:
+      $ref: "./schema/spot.yaml#/spot"
+    checkin:
+      $ref: "./schema/checkin.yaml#/checkin"
+    user:
+      $ref: "./schema/user.yaml#/user"

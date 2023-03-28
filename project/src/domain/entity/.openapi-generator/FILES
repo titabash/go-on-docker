@@ -1,0 +1,15 @@
+model__v1_spots__id__get_200_response.go
+model__v1_spots_get_200_response.go
+model_address.go
+model_category.go
+model_checkin.go
+model_google_map.go
+model_instagram.go
+model_location.go
+model_photo.go
+model_proprietary.go
+model_review.go
+model_spot.go
+model_user.go
+model_user_profile_picture.go
+utils.go

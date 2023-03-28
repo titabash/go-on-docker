@@ -1,0 +1,21 @@
+review:
+  type: object
+  properties:
+    user_id:
+      type: string
+      x-go-custom-tag: firestore:"user_id"
+    rating:
+      type: number
+      format: double
+      x-go-custom-tag: firestore:"rating"
+    comment:
+      type: string
+      x-go-custom-tag: firestore:"comment"
+    created_at:
+      type: string
+      format: date-time
+      x-go-custom-tag: firestore:"created_at"
+    updated_at:
+      type: string
+      format: date-time
+      x-go-custom-tag: firestore:"updated_at"

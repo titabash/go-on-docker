@@ -1,0 +1,25 @@
+address:
+  type: object
+  properties:
+    line1:
+      type: string
+      x-go-custom-tag: firestore:"line1"
+    line2:
+      type: string
+      x-go-custom-tag: firestore:"line2"
+    city:
+      type: string
+      x-go-custom-tag: firestore:"city"
+    state:
+      type: string
+      x-go-custom-tag: firestore:"state"
+    postal_code:
+      type: string
+      x-go-custom-tag: firestore:"postal_code"
+    country:
+      type: string
+      x-go-custom-tag: firestore:"country"
+    country_code:
+      type: string
+      x-go-custom-tag: firestore:"country_code"
+  x-go-custom-tag: firestore:"address"

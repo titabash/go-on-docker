@@ -10,34 +10,37 @@ services:
     tty: true
     volumes:
       - ./project/src:/go/src
+      - ./docker/local/credentials:/go/credentials
+      - ./openapi:/go/src/openapi
     ports:
       - 3000:8080
+      - 3001:3001
     networks:
       shared-network:
         ipv4_address: 172.30.0.2
     env_file:
       - ./env/common.env
       - ./env/local.env
+      - ./env/secret_keys.env
     command: >
       bash -c '
-        go run src/hello.go
         /bin/bash
       '
   firebase_emulator:
     build:
       context: .
-      dockerfile: ./docker/firebase/Dockerfile
+      dockerfile: ./docker/local/firebase/Dockerfile
     container_name: 'firebase_emulator'
     volumes:
-      - ./docker/firebase/.firebaserc:/opt/firebase/.firebaserc
-      - ./docker/firebase/firebase-debug.log:/opt/firebase/firebase-debug.log
-      - ./docker/firebase/firebase.json:/opt/firebase/firebase.json
-      - ./docker/firebase/firestore.indexes.json:/opt/firebase/firestore.indexes.json
-      - ./docker/firebase/firestore.rules:/opt/firebase/firestore.rules
-      - ./docker/firebase/storage.rules:/opt/firebase/storage.rules
-      - ./docker/firebase/bin/:/root/.cache:cached
-      - ./docker/firebase/config/:/root/.config:cached
-      - ./docker/firebase/data:/opt/firebase/data
+      - ./docker/local/firebase/.firebaserc:/opt/firebase/.firebaserc
+      # - ./docker/local/firebase/firebase-debug.log:/opt/firebase/firebase-debug.log
+      - ./docker/local/firebase/firebase.json:/opt/firebase/firebase.json
+      - ./docker/local/firebase/firestore.indexes.json:/opt/firebase/firestore.indexes.json
+      - ./docker/local/firebase/firestore.rules:/opt/firebase/firestore.rules
+      - ./docker/local/firebase/storage.rules:/opt/firebase/storage.rules
+      - ./docker/local/firebase/bin/:/root/.cache:cached
+      - ./docker/local/firebase/config/:/root/.config:cached
+      - ./docker/local/firebase/data:/opt/firebase/data
     ports:
       - 9099:9099 # Firebase Authentication
       - 5001:5001 # Clound Functions
@@ -51,8 +54,18 @@ services:
     networks:
       shared-network:
         ipv4_address: 172.30.0.3
-    command: firebase emulators:start --import=/opt/firebase/data/firestore --export-on-exit
+    command: firebase emulators:start --import=/opt/firebase/data/persistence --export-on-exit
     tty: true
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: "swagger-ui"
+    ports:
+      - "8002:8080"
+    volumes:
+      - ./openapi:/openapi
+    environment:
+      SWAGGER_JSON: /openapi/openapi.yaml
 
 networks:
   shared-network:

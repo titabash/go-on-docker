@@ -1,0 +1,15 @@
+photo:
+  type: object
+  properties:
+    url:
+      type: string
+      x-go-custom-tag: firestore:"url"
+    origin_url:
+      type: string
+      x-go-custom-tag: firestore:"origin_url"
+    path:
+      type: string
+      x-go-custom-tag: firestore:"path"
+    provider:
+      type: string
+      x-go-custom-tag: firestore:"provider"

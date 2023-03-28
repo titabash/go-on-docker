@@ -1,11 +1,10 @@
 env.yml
 .DS_Store
-
+*.log
 env/secret_keys.env
-notebook/*
-project/src/*
-docker/firebase/bin/*
-docker/firebase/config/*
-docker/firebase/data/*
-docker/firebase/firebase-debug.log
+docker/local/credentials/*
+docker/local/firebase/bin/*
+docker/local/firebase/config/*
+docker/local/firebase/data/*
+docker/local/firebase/firebase-debug.log
 !.gitkeep

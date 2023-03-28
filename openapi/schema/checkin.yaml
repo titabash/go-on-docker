@@ -1,0 +1,38 @@
+checkin:
+  type: object
+  required:
+    - id
+    - user_id
+    - spot_id
+    - photos
+    - address
+    - location
+    - created_at
+    - updated_at
+  properties:
+    id:
+      type: string
+      x-go-custom-tag: firestore:"id"
+    user_id:
+      type: string
+      x-go-custom-tag: firestore:"user_id"
+    spot_id:
+      type: string
+      x-go-custom-tag: firestore:"spot_id"
+    photos:
+      type: array
+      items:
+        $ref: "./photo.yaml#/photo"
+      x-go-custom-tag: firestore:"photos"
+    address:
+      $ref: "./address.yaml#/address"
+    location:
+      $ref: "./location.yaml#/location"
+    created_at:
+      type: string
+      format: date-time
+      x-go-custom-tag: firestore:"created_at"
+    updated_at:
+      type: string
+      format: date-time
+      x-go-custom-tag: firestore:"updated_at"

@@ -1,0 +1,15 @@
+location:
+  type: object
+  required:
+    - lat
+    - lng
+  properties:
+    lat:
+      type: number
+      format: double
+      x-go-custom-tag: firestore:"lat"
+    lng:
+      type: number
+      format: double
+      x-go-custom-tag: firestore:"lng"
+  x-go-custom-tag: firestore:"location"

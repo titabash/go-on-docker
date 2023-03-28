@@ -1,0 +1,80 @@
+user:
+  type: object
+  required:
+    - id
+    - display_name
+    - account_name
+    - created_at
+    - updated_at
+  properties:
+    id:
+      type: string
+      x-go-custom-tag: firestore:"id"
+    firebase_auth_id:
+      type: string
+      x-go-custom-tag: firestore:"firebase_auth_id"
+    display_name:
+      type: string
+      x-go-custom-tag: firestore:"display_name"
+    account_name:
+      type: string
+      x-go-custom-tag: firestore:"account_name"
+    first_name:
+      type: string
+      x-go-custom-tag: firestore:"first_name"
+    last_name:
+      type: string
+      x-go-custom-tag: firestore:"last_name"
+    profile_picture:
+      type: object
+      properties:
+        url:
+          type: string
+          x-go-custom-tag: firestore:"url"
+        path:
+          type: string
+          x-go-custom-tag: firestore:"path"
+      x-go-custom-tag: firestore:"profile_picture"
+    age:
+      type: integer
+      x-go-custom-tag: firestore:"age"
+    birthday:
+      type: string
+      format: date-time
+      x-go-custom-tag: firestore:"birthday"
+    gender:
+      type: string
+      x-go-custom-tag: firestore:"gender"
+    spouse_id:
+      type: string
+      nullable: true
+      x-go-custom-tag: firestore:"spouse_id"
+    children_ids:
+      type: array
+      items:
+        type: string
+      x-go-custom-tag: firestore:"children_ids"
+    address:
+      $ref: "./address.yaml#/address"
+    home_location:
+      $ref: "./location.yaml#/location"
+    current_location:
+      $ref: "./location.yaml#/location"
+    created_at:
+      type: string
+      format: date-time
+      x-go-custom-tag: firestore:"created_at"
+    updated_at:
+      type: string
+      format: date-time
+      x-go-custom-tag: firestore:"updated_at"
+    follower_ids:
+      type: array
+      items:
+        type: string
+      x-go-custom-tag: firestore:"follower_ids"
+    following_ids:
+      type: array
+      items:
+        type: string
+      x-go-custom-tag: firestore:"following_ids"

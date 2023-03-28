@@ -1,0 +1,21 @@
+get:
+  summary: Get a spot
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: string
+      description: user ID
+  responses:
+    "200":
+      description: A spot
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: "../schema/spot.yaml#/spot"
+              status:
+                type: integer

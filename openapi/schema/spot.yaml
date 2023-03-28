@@ -1,0 +1,42 @@
+spot:
+  type: object
+  required:
+    - id
+    - created_at
+    - updated_at
+  properties:
+    id:
+      type: string
+      x-go-custom-tag: firestore:"id"
+    name:
+      type: string
+      x-go-custom-tag: firestore:"name"
+    description:
+      type: string
+      x-go-custom-tag: firestore:"description"
+    provider:
+      type: string
+      x-go-custom-tag: firestore:"provider"
+    location:
+      $ref: "./location.yaml#/location"
+    instagram:
+      $ref: "./instagram.yaml#/instagram"
+    google_map:
+      $ref: "./google_map.yaml#/google_map"
+    proprietary:
+      $ref: "./proprietary.yaml#/proprietary"
+    address:
+      $ref: "./address.yaml#/address"
+    categories:
+      type: array
+      items:
+        $ref: "./category.yaml#/category"
+      x-go-custom-tag: firestore:"categories"
+    created_at:
+      type: string
+      format: date-time
+      x-go-custom-tag: firestore:"created_at"
+    updated_at:
+      type: string
+      format: date-time
+      x-go-custom-tag: firestore:"updated_at"

@@ -1,0 +1,23 @@
+instagram:
+  type: object
+  properties:
+    types:
+      type: array
+      items:
+        type: string
+      x-go-custom-tag: firestore:"types"
+    reviews:
+      type: array
+      items:
+        $ref: "./review.yaml#/review"
+      x-go-custom-tag: firestore:"reviews"
+    rating:
+      type: number
+      format: double
+      x-go-custom-tag: firestore:"rating"
+    photos:
+      type: array
+      items:
+        $ref: "./photo.yaml#/photo"
+      x-go-custom-tag: firestore:"photos"
+  x-go-custom-tag: firestore:"instagram"

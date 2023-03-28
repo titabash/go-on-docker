@@ -1,0 +1,22 @@
+get:
+  summary: Get all spots
+  parameters:
+    - in: query
+      name: last_spot_id
+      schema:
+        type: string
+      description: ID of the last spot
+  responses:
+    "200":
+      description: A list of spots
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  $ref: "../schema/spot.yaml#/spot"
+              status:
+                type: integer

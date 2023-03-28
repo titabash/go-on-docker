@@ -1,0 +1,17 @@
+category:
+  type: object
+  required:
+    - id
+    - name
+  properties:
+    id:
+      type: string
+      x-go-custom-tag: firestore:"id"
+    name:
+      type: string
+      x-go-custom-tag: firestore:"name"
+    google_map_types:
+      type: array
+      items:
+        type: string
+      x-go-custom-tag: firestore:"google_map_type"
